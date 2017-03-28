@@ -1,1 +1,1 @@
-# timer
+# schedule with slide time scale. This application lets to start multihours schedule when you need. With no link to definition time.
