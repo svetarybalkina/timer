@@ -16,10 +16,10 @@ def add_new                             # to fill schedule
                  
   def add_new_strings                         #add new string
     puts "Придумайте имя для расписания (по умолчанию todo)"
-    sch_name = gets.chomp
+    @sch_name = gets.chomp
 
-    if sch_name == ''
-      sch_name = 'todo'
+    if @sch_name == ''
+      @sch_name = 'todo'
     end
       
     puts "Что будем делать?"
@@ -37,7 +37,7 @@ def add_new                             # to fill schedule
 
     @schedule[act] = @n
 
-    output = File.open "#{sch_name}.txt", "a"
+    output = File.open "#{@sch_name}.txt", "a"
     output.write @schedule
     output.close
 
@@ -53,7 +53,7 @@ def add_new                             # to fill schedule
     b = gets.chomp
 
     if b == 'f'
-      puts "Расписание составлено: "
+      puts "Расписание #{@sch_name} составлено: "
       puts @schedule
       exit
     end
