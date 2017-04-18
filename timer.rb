@@ -51,7 +51,7 @@ def add_new_sch                         #add new schedule (askes for name), run 
 
 end
 
-def add_act_time                  #add strings - actions and periods to schedule  
+def add_act_time                        #add strings - actions and periods to schedule  
   puts "Что будем делать?"
   action = gets.chomp
   act = @ordnum.to_s + ". " + action
@@ -67,13 +67,20 @@ def add_act_time                  #add strings - actions and periods to schedule
 
 end
 
-def run
+def run                               #start schedule
 
-  if @n == 0                      # этот блок перенести в "запустить расписание"
-    @n = @t + @time               #end time of action
-  else
-    @n = @time2+@time
-  end
+  # puts "Введите имя нужного расписания (по умолчанию todo)" #call one schedule from list
+  # @sch_name = gets.chomp
+  string = File.open('todo.txt'){ |file| file.read }
+  puts string
+  
+  # if @n == 0                      
+  #   @n = @t + @time                 #end time of action
+  # else
+  #   @n = @time2+@time
+  # end
 
 end
-add_new_sch
+
+
+run
