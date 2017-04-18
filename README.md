@@ -5,4 +5,4 @@ With no link to definition time.
 There will be some visual environment, alarm on gajets monitor and sound, 
 when task from the list finishes.
 
-To app sound on Linux Mint can need mpg321. To install: sudo apt install mpg321.
+Mute notification is tasted and able for Linux Mint Mate and Windows 10. Didn't work for Linux Mint Cinnamon, Xubuntu.

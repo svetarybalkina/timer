@@ -3,16 +3,6 @@
 @ordnum = 1
 @n = 0
 
-def choice_task                     # what to do with schedules
-
-  run
-  edit
-  add_new
-  delete
-  choice_from_list
-
-end
-
 def add_strings
 
   loop do
@@ -82,5 +72,24 @@ def run                               #start schedule
 
 end
 
+def choose_task                     # what to do with schedules
+  puts "Choose what to do: run last schedule (run), add new, choose from list"
+  order = gets.chomp
+  if order == 'run'
+    run
+  elsif order == 'add_new'
+    add_new_sch
 
-run
+  # else order == 'choose from list'
+  #   choose_from_list
+  end
+  
+  # run
+  # edit
+  # add_new
+  # delete
+  # choose_from_list
+
+end
+
+choose_task
