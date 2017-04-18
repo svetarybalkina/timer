@@ -5,6 +5,7 @@
 
 def choice_task                     # what to do with schedules
 
+  run
   edit
   add_new
   delete
@@ -12,40 +13,11 @@ def choice_task                     # what to do with schedules
 
 end
 
-def add_new                             # to fill schedule
-                 
-  def add_new_strings                         #add new string
-    puts "Придумайте имя для расписания (по умолчанию todo)"
-    @sch_name = gets.chomp
+def add_strings
 
-    if @sch_name == ''
-      @sch_name = 'todo'
-    end
-      
-    puts "Что будем делать?"
-    action = gets.chomp
-      act = @ordnum.to_s + ". " + action
-
-    puts "Сколько минут будем #{action}?"
-    @time = gets.chomp.to_i*60
-
-      if @n == 0                      # этот блок перенести в "запустить расписание"
-        @n = @t + @time               #end time of action
-      else
-        @n = @time2+@time
-      end
-
-    @schedule[act] = @n
-
-    output = File.open "#{@sch_name}.txt", "a"
-    output.write @schedule
-    output.close
-
-  end
-    
   loop do
-    puts 7.chr
-    add_new_strings
+    # puts 7.chr
+    add_act_time
     @time2 = @n
     
     @ordnum += 1
@@ -64,6 +36,44 @@ def add_new                             # to fill schedule
     # end
   end
 
+end  
+
+def add_new_sch                         #add new schedule (askes for name), run add_string
+
+  puts "Назовите расписание (по умолчанию todo)"
+  @sch_name = gets.chomp
+
+  if @sch_name == ''
+    @sch_name = 'todo'
+  end
+
+  add_strings
+
 end
 
-add_new
+def add_act_time                  #add strings - actions and periods to schedule  
+  puts "Что будем делать?"
+  action = gets.chomp
+  act = @ordnum.to_s + ". " + action
+
+  puts "Сколько минут будем #{action}?"
+  @time = gets.chomp.to_i*60
+
+  @schedule[act] = @time
+
+  output = File.open "#{@sch_name}.txt", "a"
+  output.write @schedule
+  output.close
+
+end
+
+def run
+
+  if @n == 0                      # этот блок перенести в "запустить расписание"
+    @n = @t + @time               #end time of action
+  else
+    @n = @time2+@time
+  end
+
+end
+add_new_sch
