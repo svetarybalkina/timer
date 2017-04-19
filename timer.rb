@@ -96,4 +96,4 @@ def choose_task                     # what to do with schedules
   
 end
 
-run
+add_new_sch
