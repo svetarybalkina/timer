@@ -12,7 +12,6 @@ end
   # @str = { "1. жить"=>18000, "2. поспим"=>28800, "3. умываться"=>420 }
   a.each do |k, v|                       # поменять ключ на время действия
 
-    if k[0] == "1" 
       v = v.to_i
       v = Time.now + v
       puts v
@@ -25,7 +24,6 @@ end
   # # #   @n = @t + @time                 #end time of action
   # # # else
   # # #   @n = @time2+@time
-  end
   end
   puts a
 
