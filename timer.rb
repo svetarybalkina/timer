@@ -43,40 +43,35 @@ def run                               #start schedule
   puts "Введите имя нужного расписания (по умолчанию todo)" #call one schedule from list
   # @sch_name = gets.chomp
   str = File.open('todo.txt'){ |file| file.read } # импортировано расписание из файла
-cut_str = str.delete("\"\{\}")                  # обрезана строка расписания от кавычек и скобок
-spl_str = cut_str.split(', ')                    # разбита строка на блоки действие+период
-a = {}                                    
-spl_str.each_with_object({}) do |object|        # блоки сложены в новый хэш
-  key, value = object.split('=>')
-  a[key] = value
-end
+  cut_str = str.delete("\"\{\}")                  # обрезана строка расписания от кавычек и скобок
+  spl_str = cut_str.split(', ')                    # разбита строка на блоки действие+период
+  a = {}               
 
-n = 0
+  spl_str.each_with_object({}) do |object|        # блоки сложены в новый хэш
+    key, value = object.split('=>')
+    a[key] = value
+  end
+
+  n = 0
 
   a.each do |k, v|                       # значение меняется на время окончания действия пункта расписания
 
-      v = v.to_i
-      
-      if n == 0
-        v1 = Time.now + v
-        a[k] = v1
-        n = v
+    v = v.to_i
+        
+    if n == 0
+      v1 = Time.now + v
+      a[k] = v1
+      n = v
 
-      else
+    else
 
-      v1 = Time.now + v + n
-        a[k] = v1
-        n = v+n
-      end
-      
-      puts n
-
-  # # # if @n == 0                      
-  # # #   @n = @t + @time                 #end time of action
-  # # # else
-  # # #   @n = @time2+@time
+    v1 = Time.now + v + n
+      a[k] = v1
+      n = v+n
+    end
+    
   end
-  
+
   puts a
   
 end
