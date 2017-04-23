@@ -42,15 +42,42 @@ def run                               #start schedule
 
   puts "Введите имя нужного расписания (по умолчанию todo)" #call one schedule from list
   # @sch_name = gets.chomp
-  str = File.open('todo.txt'){ |file| file.read }
-  # @str = { "1. жить"=>18000, "2. поспим"=>28800, "3. умываться"=>420 }
-  str.each { |key, value| str[key] = 3 }
-  # # if @n == 0                      
-  # #   @n = @t + @time                 #end time of action
-  # # else
-  # #   @n = @time2+@time
-  # # end
-  puts str
+  str = File.open('todo.txt'){ |file| file.read } # импортировано расписание из файла
+cut_str = str.delete("\"\{\}")                  # обрезана строка расписания от кавычек и скобок
+spl_str = cut_str.split(', ')                    # разбита строка на блоки действие+период
+a = {}                                    
+spl_str.each_with_object({}) do |object|        # блоки сложены в новый хэш
+  key, value = object.split('=>')
+  a[key] = value
+end
+
+n = 0
+
+  a.each do |k, v|                       # значение меняется на время окончания действия пункта расписания
+
+      v = v.to_i
+      
+      if n == 0
+        v1 = Time.now + v
+        a[k] = v1
+        n = v
+
+      else
+
+      v1 = Time.now + v + n
+        a[k] = v1
+        n = v+n
+      end
+      
+      puts n
+
+  # # # if @n == 0                      
+  # # #   @n = @t + @time                 #end time of action
+  # # # else
+  # # #   @n = @time2+@time
+  end
+  
+  puts a
   
 end
 
@@ -96,4 +123,4 @@ def choose_task                     # what to do with schedules
   
 end
 
-add_new_sch
+run
