@@ -7,26 +7,35 @@ spl_str.each_with_object({}) do |object|        # блоки сложены в �
   a[key] = value
 end
 
-# hh[key] = value
+# loop do
+n = 0
 
-  # @str = { "1. жить"=>18000, "2. поспим"=>28800, "3. умываться"=>420 }
   a.each do |k, v|                       # поменять ключ на время действия
 
-    if k[0] == "1" 
-      v = v.to_i
-      v = Time.now + v
-      puts v
+  	  v = v.to_i
+  	  
+  	  if n == 0
+  	  	v1 = Time.now + v
+        a[k] = v1
+        n = v
 
+      else
 
-    # else 
-      # puts "No"
-    #=> 0
+      v1 = Time.now + v + n
+	      a[k] = v1
+	      n = v+n
+      end
+      
+      puts n
+
   # # # if @n == 0                      
   # # #   @n = @t + @time                 #end time of action
   # # # else
   # # #   @n = @time2+@time
   end
-  end
+
+# end
+
   puts a
 
 # t = Time.now
