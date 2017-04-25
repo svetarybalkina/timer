@@ -32,7 +32,7 @@ def add_act_time                        #add strings - actions and periods to sc
 
   @schedule[act] = @time
 
-  output = File.open "#{@sch_name}.txt", "w"
+  output = File.open "#{@sch_name}.json", "w"
   output.write @schedule
   output.close
 
@@ -41,8 +41,8 @@ end
 def run                               #start schedule
 
   puts "Введите имя нужного расписания (по умолчанию todo)" #call one schedule from list
-  # @sch_name = gets.chomp
-  str = File.open('todo.txt'){ |file| file.read } # импортировано расписание из файла
+  @sch_name = gets.chomp
+  str = File.open("#{@sch_name}.json"){ |file| file.read } # импортировано расписание из файла
   cut_str = str.delete("\"\{\}")                  # обрезана строка расписания от кавычек и скобок
   spl_str = cut_str.split(', ')                    # разбита строка на блоки действие+период
   a = {}               
@@ -73,6 +73,24 @@ def run                               #start schedule
   end
 
   puts a
+
+  loop do
+
+  present_time = Time.now
+  b =present_time.to_s
+
+    a.each do |k, v|
+      v.to_s
+      # puts "#{k} до #{b}"
+      if "#{v}" == b
+        puts "#{k} окончить. Переходите к следующему пункту."
+        puts 7.chr
+        puts a
+      # else 
+      #   puts "No"
+      end
+  end
+end
   
 end
 
@@ -118,4 +136,4 @@ def choose_task                     # what to do with schedules
   
 end
 
-run
+choose_task
