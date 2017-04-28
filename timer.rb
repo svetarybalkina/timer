@@ -84,7 +84,7 @@ def run                               # start schedule
   end
 end
 
-def add_new_sch                         # add new schedule (askes for name), run add_string
+def new_sch                         # add new schedule (askes for name), run add_string
   puts "Назовите расписание (по умолчанию todo)"
   @sch_name = gets.chomp
 
@@ -110,7 +110,7 @@ def choose_task                          # what to do with schedules
   if order == 'run'
     run
   elsif order == 'add new'
-    add_new_sch
+    new_sch
 
   elsif order == 'choose another'
     choose_another
