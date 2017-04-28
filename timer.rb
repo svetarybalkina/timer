@@ -1,11 +1,10 @@
 @t = Time.now
-@schedule = {}
+@schedule = { }
 @ordnum = 1
 @n = 0
 
 def add_strings
   loop do
-    # puts 7.chr
     add_act_time
     @time2 = @n
     
@@ -19,10 +18,9 @@ def add_strings
       exit
     end
   end
-
 end  
 
-def add_act_time                        #add strings - actions and periods to schedule  
+def add_act_time                        # add strings - actions and periods to schedule  
   puts "Что будем делать?"
   action = gets.chomp
   act = @ordnum.to_s + ". " + action
@@ -35,19 +33,17 @@ def add_act_time                        #add strings - actions and periods to sc
   output = File.open "#{@sch_name}.json", "w"
   output.write @schedule
   output.close
-
 end
 
-def run                               #start schedule
-
-  puts "Введите имя нужного расписания (по умолчанию todo)" #call one schedule from list
+def run                               # start schedule
+  puts "Введите имя нужного расписания (по умолчанию todo)" # call one schedule from list
   @sch_name = gets.chomp
-  str = File.open("#{@sch_name}.json"){ |file| file.read } # импортировано расписание из файла
+  str = File.open("#{@sch_name}.json") { |file| file.read } # импортировано расписание из файла
   cut_str = str.delete("\"\{\}")                  # обрезана строка расписания от кавычек и скобок
   spl_str = cut_str.split(', ')                    # разбита строка на блоки действие+период
-  a = {}               
+  a = { }               
 
-  spl_str.each_with_object({}) do |object|        # блоки сложены в новый хэш
+  spl_str.each_with_object( { } ) do |object|        # блоки сложены в новый хэш
     key, value = object.split('=>')
     a[key] = value
   end
@@ -62,12 +58,10 @@ def run                               #start schedule
       v1 = Time.now + v
       a[k] = v1
       n = v
-
     else
-
-    v1 = Time.now + v + n
+      v1 = Time.now + v + n
       a[k] = v1
-      n = v+n
+      n += v
     end
     
   end
@@ -77,25 +71,20 @@ def run                               #start schedule
   loop do
 
   present_time = Time.now
-  b =present_time.to_s
+  b = present_time.to_s
 
     a.each do |k, v|
       v.to_s
-      # puts "#{k} до #{b}"
-      if "#{v}" == b
+      if "# { v } " == b
         puts "#{k} окончить. Переходите к следующему пункту."
         puts 7.chr
-        puts a
-      # else 
-      #   puts "No"
+        # puts a
       end
+    end
   end
 end
-  
-end
 
-def add_new_sch                         #add new schedule (askes for name), run add_string
-
+def add_new_sch                         # add new schedule (askes for name), run add_string
   puts "Назовите расписание (по умолчанию todo)"
   @sch_name = gets.chomp
 
@@ -104,19 +93,18 @@ def add_new_sch                         #add new schedule (askes for name), run 
   end
 
   add_strings
-
 end
 
-def choose_another #не начато
-end
+def choose_another 
+end                                      # TODO
 
-def edit #не начато
-end
+def edit 
+end                                      # TODO
 
-def delete #не начато
-end
+def delete 
+end                                      # TODO
 
-def choose_task                     # what to do with schedules
+def choose_task                          # what to do with schedules
   puts "Choose what to do with your schedule: run existed schedule, add new, choose another, edit existed schedule or delete."
   order = gets.chomp
   if order == 'run'
@@ -125,15 +113,14 @@ def choose_task                     # what to do with schedules
     add_new_sch
 
   elsif order == 'choose another'
-  choose_another
+    choose_another
 
   elsif order == 'delete'
-  delete
+    delete
 
   else order == 'edit'
     edit
   end
-  
 end
 
 choose_task
