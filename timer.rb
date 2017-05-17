@@ -105,7 +105,7 @@ def delete
 end                                      # TODO
 
 def choose_task                          # what to do with schedules
-  puts "Choose what to do with your schedule: run existed schedule, add new, choose another, edit existed schedule or delete."
+  puts "Choose what to do with your schedule: run, add new, choose another, delete or edit."
   order = gets.chomp
   if order == 'run'
     run
@@ -122,5 +122,3 @@ def choose_task                          # what to do with schedules
     edit
   end
 end
-
-choose_task
