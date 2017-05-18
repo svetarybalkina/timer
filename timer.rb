@@ -50,7 +50,7 @@ def run                               # start schedule
 
   n = 0
 
-  a.each do |k, v|                       # значение меняется на время окончания действия пункта расписания
+  a.map do |k, v|                       # значение меняется на время окончания действия пункта расписания
 
     v = v.to_i
         
@@ -73,9 +73,9 @@ def run                               # start schedule
   present_time = Time.now
   b = present_time.to_s
 
-    a.each do |k, v|
+    a.map do |k, v|
       v.to_s
-      if "# { v } " == b
+      if "#{v}" == b
         puts "#{k} окончить. Переходите к следующему пункту."
         puts 7.chr
         # puts a
@@ -84,7 +84,7 @@ def run                               # start schedule
   end
 end
 
-def new_sch                         # add new schedule (askes for name), run add_string
+def add_new                         # add new schedule (askes for name), run add_string
   puts "Назовите расписание (по умолчанию todo)"
   @sch_name = gets.chomp
 
@@ -110,7 +110,7 @@ def choose_task                          # what to do with schedules
   if order == 'run'
     run
   elsif order == 'add new'
-    new_sch
+    add_new
 
   elsif order == 'choose another'
     choose_another
@@ -122,3 +122,5 @@ def choose_task                          # what to do with schedules
     edit
   end
 end
+
+choose_task
